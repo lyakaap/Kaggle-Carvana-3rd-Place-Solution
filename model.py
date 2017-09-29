@@ -23,12 +23,12 @@ def get_unet_MDCB(input_shape=(1920, 1280, 3), init_nb=44, lr=0.0001, loss=bce_d
     down3pool = MaxPooling2D((2, 2), strides=(2, 2))(down3)
     
     # stacked dilated convolution
-    dilate1 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(down3pool)
-    dilate2 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(dilate1)
-    dilate3 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(dilate2)
-    dilate4 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(dilate3)
-    dilate5 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(dilate4)
-    dilate6 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same')(dilate5)
+    dilate1 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=1)(down3pool)
+    dilate2 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=2)(dilate1)
+    dilate3 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=4)(dilate2)
+    dilate4 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=8)(dilate3)
+    dilate5 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=16)(dilate4)
+    dilate6 = Conv2D(init_nb*8, (3, 3), activation='relu', padding='same', dilation_rate=32)(dilate5)
     dilate_all_added = add([dilate1, dilate2, dilate3, dilate4, dilate5, dilate6])
     
     up3 = UpSampling2D((2, 2))(dilate_all_added)
