@@ -25,6 +25,7 @@ I mainly used windows 10 with a GPU GTX1080-Ti. My scripts need at least 11GB GP
 * (*) means it can be downloaded from competition site, and I didn't included their content in solution file.
 * 'train0~12.py' means train0.py, train1.py, ... , train12.py.
 
+```
 Carvana-All-Files (root)
 ├── csv_log
 ├── input
@@ -56,7 +57,7 @@ Carvana-All-Files (root)
 ├── image_process.py
 ├── run.sh
 └── run_no_train.sh
-
+```
 
 ## Generate submission file
 
