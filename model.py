@@ -17,8 +17,8 @@ def encoder(x, filters=44, n_block=3, kernel_size=(3, 3), activation='relu'):
     for i in range(n_block):
         x = Conv2D(filters * 2**i, kernel_size, activation=activation, padding='same')(x)
         x = Conv2D(filters * 2**i, kernel_size, activation=activation, padding='same')(x)
-        x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
         skip.append(x)
+        x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))(x)
     return x, skip
 
 
