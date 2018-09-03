@@ -31,7 +31,11 @@ for _id in ids_test:
 
 rles = []
 
-model = load_model(filepath='weights/model_weights.hdf5')
+model = load_model(
+    filepath='weights/model_weights.hdf5',
+    custom_objects={'bce_dice_loss': bce_dice_loss, 'dice_coef': dice_coef}
+)
+
 graph = tf.get_default_graph()
 
 q_size = 10
